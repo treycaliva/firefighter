@@ -4,7 +4,7 @@ RSpec.describe Firefighter::TokenGenerator do
   let(:file_token) { File.read('spec/support/files/jwt.example').chomp }
 
   it "generes proper tokens" do
-    Timecop.freeze(Date.new(2017, 1, 1)) do
+    Timecop.freeze(Time.new(2017, 1, 1, 12, 0, 0).utc) do
       token = Firefighter::TokenGenerator.from_env.create_token(uid, data: data)
 
       expect(file_token).to eql(token)
@@ -12,7 +12,7 @@ RSpec.describe Firefighter::TokenGenerator do
   end
 
   it "reads tokens" do
-    Timecop.freeze(Date.new(2017, 1, 1)) do
+    Timecop.freeze(Time.new(2017, 1, 1, 12, 0, 0).utc) do
       payload = Firefighter::TokenGenerator.from_env.read_token(file_token)
 
       expect(payload['uid']).to eql(uid)
