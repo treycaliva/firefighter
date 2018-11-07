@@ -20,8 +20,7 @@ RSpec.describe Firefighter::Identitytoolkit do
     "salt"=>"2O3a3iMkKe0FAg==",
     "validSince"=>"1541583084",
     "version"=>0}] }
-
-  let(:token_data) { "ya29.c.ElpNBgDCwQAK3n8wumy15Kitw6UgV72zfOxlVp0KdhQJPUIVoCksV22DZ_uv68df3B4dsuLIv2PCkLEq0SXvnAx7jx48FHxMqrsye_nJNVeq4hLjlcoD45BXQtM" }
+  let(:token_data) { "ya29.c.ElpNBgzYH5OmuaNlmJUHKYgXve2OmSiaFPwF-Xw2qIt3uMaDS5EMnpWTPS0NyJAzRrusnvnBIONi3Nq9YhRdzCgF2DgwsPm9xhXHGi0aVMVBq7qoGI8D2Wsuf78" }
 
   it "signsup users" do
     VCR.use_cassette('signup') do

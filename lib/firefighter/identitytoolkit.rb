@@ -1,5 +1,3 @@
-require 'jwt'
-
 module Firefighter
   class Identitytoolkit
     include Web
@@ -43,12 +41,10 @@ module Firefighter
     def download_accounts
       url = endpoint('downloadAccount')
 
+      headers = {Authorization: "Bearer #{fetch_access_token}" }
+
       users = []
-
-      access_token = fetch_access_token
-      headers = {Authorization: "Bearer #{access_token}" }
       paginate(url, headers: headers) { |data| users << data['users'] }
-
       users.flatten.compact
     end
 
