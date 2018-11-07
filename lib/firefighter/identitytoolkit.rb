@@ -1,16 +1,16 @@
 module Firefighter
-  class RealtimeDatabase
+  class Identitytoolkit
     include Web
 
     def self.from_env
       config = {
-        db_secret: ENV['FIREBASE_WEB_DB_SECRET']
+        api_key: ENV['FIREBASE_WEB_API_KEY']
       }
       new(config)
     end
 
-    def initialize(db_secret:)
-      @db_secret = db_secret
+    def initialize(api_key:)
+      @api_key = api_key
     end
 
     def signup(email, password)

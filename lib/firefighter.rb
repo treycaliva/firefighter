@@ -1,4 +1,5 @@
 require "firefighter/version"
 require "firefighter/web"
+require "firefighter/identitytoolkit"
 require "firefighter/realtime_database"
 require "firefighter/token_generator"
