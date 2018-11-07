@@ -17,7 +17,7 @@ module Firefighter
       if response.status == 200
         JSON.parse(response.body)
       else
-        @logger.warn "firebase #{method} failed #{url} #{response.body}"
+        logger.warn "firebase #{method} failed #{url} #{response.body}"
         raise "firebase #{method} failed #{url} #{response.body}"
       end
     end
