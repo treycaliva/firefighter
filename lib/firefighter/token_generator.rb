@@ -7,18 +7,30 @@ module Firefighter
       config = {
         service_account_email: ENV['FIREBASE_SERVICE_ACCOUNT_EMAIL'],
         private_key: OpenSSL::PKey::RSA.new(ENV['FIREBASE_PRIVATE_KEY_DATA']),
-        algorithm: 'RS256',
       }
       new(config)
     end
 
-    def initialize(service_account_email:, private_key:, algorithm:)
+    def initialize(service_account_email:, private_key:, algorithm: 'RS256')
       @service_account_email = service_account_email
       @private_key = private_key
       @algorithm = algorithm
     end
 
-    def create_token(uid, data: {}, expiration: 60 * 60)
+
+    def create_access_token(expiration: 60 * 60)
+      now_seconds = Time.now.to_i
+      payload = {
+          iss: @service_account_email,
+          scope: 'https://www.googleapis.com/auth/identitytoolkit',
+          aud: 'https://accounts.google.com/o/oauth2/token',
+          iat: now_seconds,
+          exp: now_seconds + expiration, # Maximum expiration time is one hour
+      }
+      ::JWT.encode(payload, @private_key, @algorithm)
+    end
+
+    def create_custom_token(uid, data: {}, expiration: 60 * 60)
       now_seconds = Time.now.to_i
       payload = {
         iss: @service_account_email,

@@ -13,10 +13,11 @@ module Firefighter
       new(config)
     end
 
-    def initialize(api_key:, service_account_email:, service_account_private_key_data:)
+    def initialize(api_key:, service_account_email:, service_account_private_key_data:, token_generator: TokenGenerator.from_env)
       @api_key = api_key
       @service_account_email = service_account_email
       @service_account_private_key_data = service_account_private_key_data
+      @token_generator = token_generator
     end
 
     def signup(email, password)
@@ -51,20 +52,10 @@ module Firefighter
       users.flatten.compact
     end
 
-    def fetch_access_token(expiration: 60 * 60)
-      now = Time.new
-      assertion = {
-          'iss' => @service_account_email,
-          'scope' => 'https://www.googleapis.com/auth/identitytoolkit',
-          'aud' => 'https://accounts.google.com/o/oauth2/token',
-          'exp' => (now + expiration).to_i,
-          'iat' => now.to_i
-      }
-      assertion = ::JWT.encode(assertion, OpenSSL::PKey::RSA.new(@service_account_private_key_data), 'RS256')
-
+    def fetch_access_token
       url = 'https://accounts.google.com/o/oauth2/token'
       data = {
-        assertion: assertion,
+        assertion: @token_generator.create_access_token,
         grant_type: 'urn:ietf:params:oauth:grant-type:jwt-bearer'
       }
       response = call(:post, url, data)
@@ -75,6 +66,7 @@ module Firefighter
 
     def paginate(url, method: :post, headers: {}, page_size: 100, max_iterations: 1000)
       next_page_token = nil
+
       max_iterations.times do
         data = {
           nextPageToken: next_page_token,
