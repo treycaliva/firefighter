@@ -12,11 +12,10 @@ module Firefighter
       new(config)
     end
 
-    def initialize(service_account_email:, private_key:, algorithm:, logger: Logger.new(STDOUT))
+    def initialize(service_account_email:, private_key:, algorithm:)
       @service_account_email = service_account_email
       @private_key = private_key
       @algorithm = algorithm
-      @logger = logger
     end
 
     def create_token(uid, data: {}, expiration: 60 * 60)

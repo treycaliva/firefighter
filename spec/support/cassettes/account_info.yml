@@ -1,0 +1,79 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://www.googleapis.com/identitytoolkit/v3/relyingparty/getAccountInfo?key=AIzaSyC9Sr5Hd__ixE5YTCanrgxH3b2IQnJqIho
+    body:
+      encoding: UTF-8
+      string: '{"idToken":"eyJhbGciOiJSUzI1NiIsImtpZCI6ImZkZjY0MWJmNDY3MTA1YzMyYWRkMDI3MGIyZTEyZDJiZTJhYmNjY2IiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3NlY3VyZXRva2VuLmdvb2dsZS5jb20vcnVieS1maXJlZmlnaHRlciIsImF1ZCI6InJ1YnktZmlyZWZpZ2h0ZXIiLCJhdXRoX3RpbWUiOjE1NDE1ODMwODQsInVzZXJfaWQiOiI3Uml2QUsyTzVSY0pJVmdwbEFpRjVXeGNkdnExIiwic3ViIjoiN1JpdkFLMk81UmNKSVZncGxBaUY1V3hjZHZxMSIsImlhdCI6MTU0MTU4MzA4NCwiZXhwIjoxNTQxNTg2Njg0LCJlbWFpbCI6InRlc3RAdGVzdC5kZSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwiZmlyZWJhc2UiOnsiaWRlbnRpdGllcyI6eyJlbWFpbCI6WyJ0ZXN0QHRlc3QuZGUiXX0sInNpZ25faW5fcHJvdmlkZXIiOiJwYXNzd29yZCJ9fQ.NuEa8g9JhtSev1-aDXIejYWwnshSBPW7RLdZXmrPs6Ni-1gVZAnRkW13bY1pSLr_3EgjZfsM-HZhM9K6wXItcfQfUxIUsUxGjWM8FSENNgjmYA2GmPx2c3n0W-vTPuVp7d33RcOXj1sVW1nVgjfvCmduS7Y_jstD9iDvot0ORD0dSR_bl5Q4-iCYQUM5HXH16Uhi0tNwop8IFEYm7XKDrlwr-xi8FjSvU4bBOOoNgakvfszW_BRIo-tVZvCJ66VRjvfz6aiP5I4ydxhqxfP2UIUacIeBiKzoBl4cxZw3u11l1pf_aWMCSIW_kzT6qQl7VSmgcCL5L8O9n_0XFMxVVw","localId":[],"email":[]}'
+    headers:
+      Content-Type:
+      - application/json
+      Connection:
+      - close
+      Host:
+      - www.googleapis.com
+      User-Agent:
+      - http.rb/3.3.0
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - no-cache, no-store, max-age=0, must-revalidate
+      Date:
+      - Wed, 07 Nov 2018 09:52:12 GMT
+      Expires:
+      - Mon, 01 Jan 1990 00:00:00 GMT
+      Content-Type:
+      - application/json; charset=UTF-8
+      Vary:
+      - Origin,Accept-Encoding
+      - Referer
+      - X-Origin
+      Server:
+      - ESF
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Content-Type-Options:
+      - nosniff
+      Alt-Svc:
+      - quic=":443"; ma=2592000; v="44,43,39,35"
+      Accept-Ranges:
+      - none
+      Connection:
+      - close
+    body:
+      encoding: UTF-8
+      string: |
+        {
+          "kind": "identitytoolkit#GetAccountInfoResponse",
+          "users": [
+            {
+              "localId": "7RivAK2O5RcJIVgplAiF5Wxcdvq1",
+              "email": "test@test.de",
+              "passwordHash": "UkVEQUNURUQ=",
+              "emailVerified": false,
+              "passwordUpdatedAt": 1541583084000,
+              "providerUserInfo": [
+                {
+                  "providerId": "password",
+                  "federatedId": "test@test.de",
+                  "email": "test@test.de",
+                  "rawId": "test@test.de"
+                }
+              ],
+              "validSince": "1541583084",
+              "lastLoginAt": "1541583084000",
+              "createdAt": "1541583084000"
+            }
+          ]
+        }
+    http_version: 
+  recorded_at: Wed, 07 Nov 2018 09:52:12 GMT
+recorded_with: VCR 4.0.0
