@@ -6,15 +6,13 @@ module Firefighter
       config = {
         api_key: ENV['FIREBASE_WEB_API_KEY'],
         service_account_email: ENV['FIREBASE_SERVICE_ACCOUNT_EMAIL'],
-        service_account_private_key_data: ENV['FIREBASE_PRIVATE_KEY_DATA'],
       }
       new(config)
     end
 
-    def initialize(api_key:, service_account_email:, service_account_private_key_data:, token_generator: TokenGenerator.from_env)
+    def initialize(api_key:, service_account_email:, token_generator: TokenGenerator.from_env)
       @api_key = api_key
       @service_account_email = service_account_email
-      @service_account_private_key_data = service_account_private_key_data
       @token_generator = token_generator
     end
 

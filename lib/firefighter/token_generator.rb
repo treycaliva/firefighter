@@ -6,15 +6,15 @@ module Firefighter
     def self.from_env
       config = {
         service_account_email: ENV['FIREBASE_SERVICE_ACCOUNT_EMAIL'],
-        private_key: OpenSSL::PKey::RSA.new(ENV['FIREBASE_PRIVATE_KEY_DATA']),
+        service_account_private_key: ENV['FIREBASE_SERVICE_ACCOUNT_PRIVATE_KEY'],
       }
       new(config)
     end
 
-    def initialize(service_account_email:, private_key:, algorithm: 'RS256')
+    def initialize(service_account_email:, service_account_private_key:, algorithm: 'RS256')
       @service_account_email = service_account_email
-      @private_key = private_key
       @algorithm = algorithm
+      @private_key = OpenSSL::PKey::RSA.new(service_account_private_key)
     end
 
 
