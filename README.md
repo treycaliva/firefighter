@@ -2,9 +2,9 @@
 
 Talk to Firebase API from Ruby:
 
-- signup
-- read, write, add data
-- generate JWT tokens for token-auth
+- identity: signup, account_info, accounts_download
+- realtime: read, write, add data
+- tokens: generate JWT tokens for token-auth
 
 ## Installation
 
@@ -24,7 +24,51 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+# Firefighter::Identitytoolkit
+# from_env uses environment variables:
+# - FIREBASE_WEB_API_KEY
+# - FIREBASE_SERVICE_ACCOUNT_EMAIL
+identitytoolkit = Firefighter::Identitytoolkit.from_env
+
+account = identitytoolkit.signup('test@test.de', 'totalgeheimespasswort')
+
+account = identitytoolkit.account_info(account['idToken'])
+
+accounts = identitytoolkit.download_accounts
+
+
+it "fetch_access_token" do
+VCR.use_cassette('fetch_access_token') do
+token = Firefighter::Identitytoolkit.from_env.fetch_access_token
+expect(token).to eql(token_data)
+
+# Firefighter::RealtimeDatabase
+# from_env uses environment variables:
+# - FIREBASE_WEB_DB_NAME
+# - FIREBASE_WEB_DB_SECRET
+realtime_database = Firefighter::RealtimeDatabase.from_env
+
+realtime_database.write("some-path/key", {some: 'data'})
+
+hash = realtime_database.read("some-path/key")
+
+realtime_database.add("some-path/list", {some: 'data'})
+
+list = realtime_database.read("some-path/list")
+
+# Firefighter::TokenGenerator
+# from_env uses environment variables:
+# - FIREBASE_SERVICE_ACCOUNT_EMAIL
+# - FIREBASE_SERVICE_ACCOUNT_PRIVATE_KEY
+token_generator = Firefighter::TokenGenerator.from_env
+
+access_token = token_generator.create_access_token
+
+custom_token = token_generator.create_custom_token('someUid', data: {some: 'payload'})
+
+payload = token_generator.read_token(custom_token)
+```
 
 ## Development
 
