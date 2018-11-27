@@ -5,7 +5,7 @@ RSpec.describe Firefighter::TokenGenerator do
   let(:access_token_file) { File.read('spec/support/files/access_token_jwt.example').chomp }
 
   it "generes proper access_tokens" do
-    Timecop.freeze(Time.new(2017, 1, 1, 12, 0, 0).utc) do
+    Timecop.freeze(Time.utc(2017, 1, 1, 12, 0, 0)) do
       token = Firefighter::TokenGenerator.from_env.create_access_token
 
       expect(token).to eql(access_token_file)
@@ -13,7 +13,7 @@ RSpec.describe Firefighter::TokenGenerator do
   end
 
   it "generes proper custom_tokens" do
-    Timecop.freeze(Time.new(2017, 1, 1, 12, 0, 0).utc) do
+    Timecop.freeze(Time.utc(2017, 1, 1, 12, 0, 0)) do
       token = Firefighter::TokenGenerator.from_env.create_custom_token(uid, data: data)
 
       expect(token).to eql(custom_token_file)
@@ -21,7 +21,7 @@ RSpec.describe Firefighter::TokenGenerator do
   end
 
   it "reads tokens" do
-    Timecop.freeze(Time.new(2017, 1, 1, 12, 0, 0).utc) do
+    Timecop.freeze(Time.utc(2017, 1, 1, 12, 0, 0)) do
       payload = Firefighter::TokenGenerator.from_env.read_token(custom_token_file)
 
       expect(payload['uid']).to eql(uid)
