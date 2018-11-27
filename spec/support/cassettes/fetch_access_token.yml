@@ -1,0 +1,57 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://accounts.google.com/o/oauth2/token
+    body:
+      encoding: UTF-8
+      string: '{"assertion":"eyJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJmaXJlYmFzZS1hZG1pbnNkay16c2l6akBydWJ5LWZpcmVmaWdodGVyLmlhbS5nc2VydmljZWFjY291bnQuY29tIiwic2NvcGUiOiJodHRwczovL3d3dy5nb29nbGVhcGlzLmNvbS9hdXRoL2lkZW50aXR5dG9vbGtpdCIsImF1ZCI6Imh0dHBzOi8vYWNjb3VudHMuZ29vZ2xlLmNvbS9vL29hdXRoMi90b2tlbiIsImlhdCI6MTU0MTU4OTk1MiwiZXhwIjoxNTQxNTkzNTUyfQ.W8KVvvh4aqzzzdsyyJ5w6QYfKX0cGCXI04CyEskctf0wJtH2dqS8MF3NrDof6Gu5pWH-nqjLfoobPWTNMp4AxS1Yqlb40GSggW8Roph1ojOifnpy26iW-dK5jRCYAth7xO4olL-73n_fa4JiertOzeImsg1szdWitBcjVXUKyeT4zKUCiHE9hQ-PTp6R-TzOFJ3THXGmjU6zugcFdZi66JjHrSxYWB3Bzf6GyvoNcwWJK0PkpErC2x7_x4g93BLtHGhajxlG3OYpkNTaRmg1hJ7jY1ANaD-Je0KCdj1jOfcQh1Vy_b3XLilAcZnDcQ7yCuDWU091PjBzaxAch9VRwg","grant_type":"urn:ietf:params:oauth:grant-type:jwt-bearer"}'
+    headers:
+      Connection:
+      - close
+      Content-Type:
+      - application/json; charset=UTF-8
+      Host:
+      - accounts.google.com
+      User-Agent:
+      - http.rb/3.3.0
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Content-Type:
+      - application/json; charset=utf-8
+      Vary:
+      - Origin,Accept-Encoding
+      - Referer
+      - X-Origin
+      Date:
+      - Wed, 07 Nov 2018 11:25:53 GMT
+      Server:
+      - ESF
+      Cache-Control:
+      - private
+      X-Xss-Protection:
+      - 1; mode=block
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Content-Type-Options:
+      - nosniff
+      Alt-Svc:
+      - quic=":443"; ma=2592000; v="44,43,39,35"
+      Accept-Ranges:
+      - none
+      Connection:
+      - close
+    body:
+      encoding: UTF-8
+      string: |-
+        {
+          "access_token": "ya29.c.ElpNBgzYH5OmuaNlmJUHKYgXve2OmSiaFPwF-Xw2qIt3uMaDS5EMnpWTPS0NyJAzRrusnvnBIONi3Nq9YhRdzCgF2DgwsPm9xhXHGi0aVMVBq7qoGI8D2Wsuf78",
+          "expires_in": 3600,
+          "token_type": "Bearer"
+        }
+    http_version: 
+  recorded_at: Wed, 07 Nov 2018 11:25:53 GMT
+recorded_with: VCR 4.0.0
