@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    firefighter (0.2.0)
+    firefighter (0.2.1)
       http (~> 3.0)
       jwt (~> 2.0)
 
@@ -67,4 +67,4 @@ DEPENDENCIES
   webmock (~> 3.4)
 
 BUNDLED WITH
-   1.16.1
+   1.17.2
