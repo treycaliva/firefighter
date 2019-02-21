@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    firefighter (0.2.1)
+    firefighter (0.3.0)
       http (~> 3.0)
       jwt (~> 2.0)
 
