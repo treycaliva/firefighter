@@ -9,9 +9,12 @@ module Firefighter
     end
 
     def call(method, url, data = {}, headers = {})
-      if method == :get
+      case method
+      when :get
         response = HTTP.get(url, headers: headers)
-      elsif method == :form
+      when :delete
+        response = HTTP.delete(url, headers: headers)
+      when :form
         response = HTTP.send(:post, url, form: data, headers: headers)
       else
         response = HTTP.send(method, url, json: data, headers: headers)
