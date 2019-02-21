@@ -18,6 +18,12 @@ RSpec.describe Firefighter::RealtimeDatabase do
     end
   end
 
+  it "deletes data" do
+    VCR.use_cassette('delete') do
+      Firefighter::RealtimeDatabase.from_env.delete("some-test/write/#{firebase_token}")
+    end
+  end
+
   it "adds data" do
     VCR.use_cassette('add') do
       updated_data = []

@@ -30,6 +30,11 @@ module Firefighter
       call(:get, url)
     end
 
+    def delete(path)
+      url = endpoint(path)
+      call(:delete, url)
+    end
+
     private
 
     def endpoint(path)
