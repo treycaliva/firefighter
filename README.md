@@ -93,4 +93,4 @@ Everyone interacting in the Firefighter project’s codebases, issue trackers, c
 
 ## Changelog
 
-[code of conduct](https://github.com/penseo/firefighter/blob/master/CHANGELOG.md)
+[changelog](https://github.com/penseo/firefighter/blob/master/CHANGELOG.md)
