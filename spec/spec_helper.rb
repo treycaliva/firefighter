@@ -2,6 +2,7 @@ require "bundler/setup"
 require "firefighter"
 require "timecop"
 require 'vcr'
+require 'byebug'
 require_relative 'support/credentials'
 
 VCR.configure do |config|

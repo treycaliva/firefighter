@@ -15,6 +15,19 @@ module Firefighter
       @db_secret = db_secret
     end
 
+    def listen(path)
+      url = endpoint(path)
+      sse(url) do |connection, event, payload|
+        data = JSON.parse(payload)
+        yield connection, event, data['path'], data['data']
+      end
+    end
+
+    def read(path)
+      url = endpoint(path)
+      call(:get, url)
+    end
+
     def write(path, data)
       url = endpoint(path)
       call(:put, url, data)
@@ -23,11 +36,6 @@ module Firefighter
     def add(path, data)
       url = endpoint(path)
       call(:post, url, data)
-    end
-
-    def read(path)
-      url = endpoint(path)
-      call(:get, url)
     end
 
     def delete(path)
