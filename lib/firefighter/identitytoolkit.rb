@@ -10,10 +10,9 @@ module Firefighter
       new(config)
     end
 
-    def initialize(api_key:, service_account_email:, token_generator: TokenGenerator.from_env)
+    def initialize(api_key:, service_account_email:)
       @api_key = api_key
       @service_account_email = service_account_email
-      @token_generator = token_generator
     end
 
     def signup(email, password)
@@ -36,24 +35,14 @@ module Firefighter
       call(:post, url, data)
     end
 
-    def download_accounts
-      url = endpoint('downloadAccount')
-
-      headers = {Authorization: "Bearer #{fetch_access_token}" }
-
+    def download_accounts(access_token = TokenGenerator.from_env.fetch_access_token)
       users = []
-      paginate(url, headers: headers) { |data| users << data['users'] }
-      users.flatten.compact
-    end
 
-    def fetch_access_token
-      url = 'https://accounts.google.com/o/oauth2/token'
-      data = {
-        assertion: @token_generator.create_access_token,
-        grant_type: 'urn:ietf:params:oauth:grant-type:jwt-bearer'
-      }
-      response = call(:post, url, data)
-      response['access_token']
+      headers = {Authorization: "Bearer #{access_token}" }
+      url = endpoint('downloadAccount')
+      paginate(url, headers: headers) { |data| users << data['users'] }
+
+      users.flatten.compact
     end
 
     private

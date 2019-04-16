@@ -20,7 +20,6 @@ RSpec.describe Firefighter::Identitytoolkit do
     "salt"=>"2O3a3iMkKe0FAg==",
     "validSince"=>"1541583084",
     "version"=>0}] }
-  let(:token_data) { "ya29.c.ElpNBgzYH5OmuaNlmJUHKYgXve2OmSiaFPwF-Xw2qIt3uMaDS5EMnpWTPS0NyJAzRrusnvnBIONi3Nq9YhRdzCgF2DgwsPm9xhXHGi0aVMVBq7qoGI8D2Wsuf78" }
 
   it "signsup users" do
     VCR.use_cassette('signup') do
@@ -40,13 +39,6 @@ RSpec.describe Firefighter::Identitytoolkit do
     VCR.use_cassette('download_accounts') do
       data = Firefighter::Identitytoolkit.from_env.download_accounts
       expect(data).to eql(download_data)
-    end
-  end
-
-  it "fetch_access_token" do
-    VCR.use_cassette('fetch_access_token') do
-      token = Firefighter::Identitytoolkit.from_env.fetch_access_token
-      expect(token).to eql(token_data)
     end
   end
 end
