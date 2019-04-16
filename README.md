@@ -3,7 +3,7 @@
 Talk to Firebase API from Ruby:
 
 - identity: signup, account_info, accounts_download
-- realtime: read, write, add, delete data
+- realtime: read, listen, write, add, delete data
 - tokens: generate JWT tokens for token-auth
 
 ## Installation
