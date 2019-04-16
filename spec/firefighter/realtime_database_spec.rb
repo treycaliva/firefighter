@@ -19,17 +19,19 @@ RSpec.describe Firefighter::RealtimeDatabase do
   end
 
   it "streams data" do
-    WebMock.disable! # cannot use allow_web_connect! see https://github.com/httprb/http/issues/212
+    begin
+      WebMock.disable! # cannot use allow_web_connect! see https://github.com/httprb/http/issues/212
 
-    client = Firefighter::RealtimeDatabase.from_env
-    client.listen("some-test/write/") do |connection, event, path, data|
-      expect(event).to eql("put")
-      expect(path).to eql("/")
-      expect(data).to eql(data)
-      connection.close
+      client = Firefighter::RealtimeDatabase.from_env
+      client.listen("some-test/write/") do |connection, event, path, data|
+        expect(event).to eql("put")
+        expect(path).to eql("/")
+        expect(data).to eql(data)
+        connection.close
+      end
+    ensure
+      WebMock.enable!
     end
-  ensure
-    WebMock.enable!
   end
 
   it "deletes data" do
