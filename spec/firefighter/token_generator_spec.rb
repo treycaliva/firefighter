@@ -3,6 +3,7 @@ RSpec.describe Firefighter::TokenGenerator do
   let(:data) { { 'fire' => 'hose' } }
   let(:custom_token_file) { File.read('spec/support/files/custom_token_jwt.example').chomp }
   let(:access_token_file) { File.read('spec/support/files/access_token_jwt.example').chomp }
+  let(:token_data) { "ya29.c.ElpNBgzYH5OmuaNlmJUHKYgXve2OmSiaFPwF-Xw2qIt3uMaDS5EMnpWTPS0NyJAzRrusnvnBIONi3Nq9YhRdzCgF2DgwsPm9xhXHGi0aVMVBq7qoGI8D2Wsuf78" }
 
   it "generes proper access_tokens" do
     Timecop.freeze(Time.utc(2017, 1, 1, 12, 0, 0)) do
@@ -26,6 +27,13 @@ RSpec.describe Firefighter::TokenGenerator do
 
       expect(payload['uid']).to eql(uid)
       expect(payload['data']).to eql(data)
+    end
+  end
+
+  it "fetch_access_token" do
+    VCR.use_cassette('fetch_access_token') do
+      token = Firefighter::TokenGenerator.from_env.fetch_access_token
+      expect(token).to eql(token_data)
     end
   end
 end

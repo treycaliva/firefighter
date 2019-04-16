@@ -3,6 +3,8 @@ require 'jwt'
 # https://firebase.google.com/docs/auth/admin/create-custom-tokens
 module Firefighter
   class TokenGenerator
+    include Web
+
     def self.from_env
       config = {
         service_account_email: ENV['FIREBASE_SERVICE_ACCOUNT_EMAIL'],
@@ -17,6 +19,15 @@ module Firefighter
       @private_key = OpenSSL::PKey::RSA.new(service_account_private_key)
     end
 
+    def fetch_access_token
+      url = 'https://accounts.google.com/o/oauth2/token'
+      data = {
+        assertion: create_access_token,
+        grant_type: 'urn:ietf:params:oauth:grant-type:jwt-bearer'
+      }
+      response = call(:post, url, data)
+      response['access_token']
+    end
 
     def create_access_token(expiration: 60 * 60)
       now_seconds = Time.now.to_i

@@ -84,6 +84,10 @@ Everyone interacting in the Firefighter project’s codebases, issue trackers, c
 
 ## Changelog
 
+### TODO
+
+- moves `Firefighter::RealtimeDatabase#fetch_access_token` to `Firefighter::TokenGenerator#fetch_access_token`
+
 ### 0.3.0
 
 - adds `Firefighter::RealtimeDatabase#delete`
