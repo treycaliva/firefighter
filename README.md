@@ -36,9 +36,9 @@ account = identitytoolkit.signup('test@test.de', 'totalgeheimespasswort')
 account = identitytoolkit.account_info(account['idToken'])
 
 accounts = identitytoolkit.download_accounts
+```
 
-token = identitytoolkit.fetch_access_token
-
+```ruby
 # Firefighter::RealtimeDatabase
 # from_env uses environment variables:
 # - FIREBASE_WEB_DB_NAME
@@ -55,6 +55,13 @@ list = realtime_database.read("some-path/list")
 
 realtime_database.delete("some-path/list")
 
+realtime_database.listen("some-test/write/") do |connection, event, path, data|
+  puts event, path, data
+  connection.close
+end
+```
+
+```ruby
 # Firefighter::TokenGenerator
 # from_env uses environment variables:
 # - FIREBASE_SERVICE_ACCOUNT_EMAIL
@@ -66,6 +73,8 @@ access_token = token_generator.create_access_token
 custom_token = token_generator.create_custom_token('someUid', data: {some: 'payload'})
 
 payload = token_generator.read_token(custom_token)
+
+token = token_generator.fetch_access_token
 ```
 
 ## Development
@@ -86,6 +95,7 @@ Everyone interacting in the Firefighter project’s codebases, issue trackers, c
 
 ### TODO
 
+- adds `Firefighter::RealtimeDatabase#listen`
 - moves `Firefighter::RealtimeDatabase#fetch_access_token` to `Firefighter::TokenGenerator#fetch_access_token`
 
 ### 0.3.0
