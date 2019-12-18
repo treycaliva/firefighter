@@ -34,7 +34,7 @@ module Firefighter
       }
       response = call(:post, url, data)
 
-      response["users"].first["customClaims"] = [JSON.parse(response["users"].first["customAttributes"], symbolize_names: true)] if response["users"].first["customAttributes"]
+      response["users"].first["customClaims"] = JSON.parse(response["users"].first["customAttributes"], symbolize_names: true) if response["users"].first["customAttributes"]
       response
     end
 
