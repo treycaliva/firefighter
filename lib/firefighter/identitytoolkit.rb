@@ -32,7 +32,10 @@ module Firefighter
         localId: local_ids,
         email: emails,
       }
-      call(:post, url, data)
+      response = call(:post, url, data)
+
+      response["users"].first["customClaims"] = [JSON.parse(response["users"].first["customAttributes"], symbolize_names: true)] if response["users"].first["customAttributes"]
+      response
     end
 
     def download_accounts(access_token = TokenGenerator.from_env.fetch_access_token)

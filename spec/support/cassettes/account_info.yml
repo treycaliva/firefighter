@@ -70,7 +70,8 @@ http_interactions:
               ],
               "validSince": "1541583084",
               "lastLoginAt": "1541583084000",
-              "createdAt": "1541583084000"
+              "createdAt": "1541583084000",
+              "customAttributes": "{\"administrator\":true}"
             }
           ]
         }
